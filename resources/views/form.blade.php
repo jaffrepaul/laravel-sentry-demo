@@ -8,10 +8,6 @@
     <title>Form Submission</title>
 </head>
 <body>
-    @if(session('success'))
-        <p class="success-message">{{ session('success') }}</p>
-    @endif
-
     <form action="{{ route('submit.form') }}" method="POST">
         @csrf
         <label>Name:</label>
@@ -25,5 +21,9 @@
         <br>
         <button type="submit">Submit</button>
     </form>
+
+    @if(session('success'))
+        <p class="success-message">{{ session('success') }}</p>
+    @endif
 </body>
 </html>
