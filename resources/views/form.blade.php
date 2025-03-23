@@ -4,25 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite(['resources/css/app.css'])
-    <title>Form Submission</title>
+    <title>Contact Form</title>
 </head>
 <body>
-    <form action="{{ route('submit.form') }}" method="POST">
-        @csrf
-        <label>Name:</label>
-        <input type="text" name="name" required>
-        <br>
-        <label>Email:</label>
-        <input type="email" name="email" required>
-        <br>
-        <label>Message:</label>
-        <textarea name="message" required></textarea>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h1>Contact Us</h1>
 
-    @if(session('success'))
-        <p class="success-message">{{ session('success') }}</p>
-    @endif
+        <form action="{{ route('submit.form') }}" method="POST" novalidate>
+            @csrf
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="{{ old('name') }}"
+                    @error('name') aria-invalid="true" @enderror
+                >
+                @error('name')
+                    <span class="error-message">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    @error('email') aria-invalid="true" @enderror
+                >
+                @error('email')
+                    <span class="error-message">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    @error('message') aria-invalid="true" @enderror
+                >{{ old('message') }}</textarea>
+                @error('message')
+                    <span class="error-message">{{ $message }}</span>
+                @enderror
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        @if(session('success'))
+            <div class="success-message" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
 </body>
 </html>

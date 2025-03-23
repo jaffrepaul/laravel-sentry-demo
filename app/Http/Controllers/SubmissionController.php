@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Submission;
+use App\Http\Requests\SubmissionRequest;
+use App\Services\SubmissionService;
+use Illuminate\Http\RedirectResponse;
 
 class SubmissionController extends Controller
 {
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'message' => 'required'
-        ]);
+    public function __construct(
+        private readonly SubmissionService $submissionService
+    ) {}
 
-        Submission::create($request->all());
+    public function store(SubmissionRequest $request): RedirectResponse
+    {
+        $this->submissionService->storeSubmission($request->validated());
 
         return back()->with('success', 'Form submitted successfully!');
     }
