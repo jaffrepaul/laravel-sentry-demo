@@ -1,3 +1,4 @@
+/* Style for the body to center the form */
 body {
     display: flex;
     justify-content: center;
@@ -8,6 +9,7 @@ body {
     font-family: system-ui, -apple-system, sans-serif;
 }
 
+/* Style for the form container */
 form {
     background-color: white;
     padding: 20px;
@@ -17,6 +19,7 @@ form {
     max-width: 400px;
 }
 
+/* Style for form fields */
 form input,
 form textarea {
     width: 100%;
@@ -27,12 +30,14 @@ form textarea {
     box-sizing: border-box;
 }
 
+/* Style for form labels */
 form label {
     font-weight: bold;
     margin-bottom: 5px;
     display: block;
 }
 
+/* Style for submit button */
 form button {
     width: 100%;
     padding: 10px;
@@ -56,6 +61,7 @@ form button:active {
     box-shadow: none;
 }
 
+/* Success message style */
 .success-message {
     color: #4caf50;
     margin-bottom: 15px;
