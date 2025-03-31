@@ -27,12 +27,6 @@ Route::get('/debug-db', function () {
     DB::connection()->getPdo()->exec('SELECT * FROM non_existent_table');
 });
 
-Route::get('/debug-validation', function () {
-    throw new \Illuminate\Validation\ValidationException(
-        validator([], ['email' => 'required|email'])
-    );
-});
-
 Route::get('/debug-auth', function () {
     throw new \Illuminate\Auth\AuthenticationException();
 });

@@ -39,6 +39,7 @@
                     value="{{ old('email') }}"
                     @error('email') aria-invalid="true" @enderror
                 >
+                <small class="hint-text">Use test@email.com to trigger client-side error</small>
                 @error('email')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
@@ -64,6 +65,13 @@
                 {{ session('success') }}
             </div>
         @endif
+
+        <div class="test-section">
+            <h2>Break Stuff!!</h2>
+            <p>Click the button below to trigger various errors that will display in Sentry</p>
+            <button id="testEndpoints" class="test-button">Run All Test Endpoints</button>
+            <div id="testResults" class="test-results"></div>
+        </div>
     </div>
 </body>
 </html>

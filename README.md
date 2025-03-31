@@ -108,14 +108,14 @@ The application includes several ways to test Sentry error tracking:
     - Submit with fields exceeding maximum length
 
 2. **Test Error Routes**:
-   Visit these URLs to trigger different types of errors:
+   Click the "Run All Test Endpoints" button on the form page to trigger different types of errors:
 
-    - `http://localhost:8000/debug-sentry` - Basic exception
-    - `http://localhost:8000/debug-db` - Database error
-    - `http://localhost:8000/debug-validation` - Validation error
-    - `http://localhost:8000/debug-auth` - Authentication error
-    - `http://localhost:8000/debug-not-found` - 404 error
-    - `http://localhost:8000/trigger-error` - Custom error
+    - Basic exception
+    - Database error
+    - Validation error
+    - Authentication error
+    - 404 error
+    - Custom error
 
 3. **Frontend Errors**:
     - Submit the form with an email containing "test" to trigger a JavaScript error
@@ -181,20 +181,16 @@ After triggering errors, you can view them in your Sentry dashboard:
 
 ### 4. Test Error Routes
 
-Visit each error route and check Sentry:
+Click the "Run All Test Endpoints" button on the form page to trigger all test errors at once. This will:
 
-1. `http://localhost:8000/debug-sentry`
-    - Should show a basic exception
-2. `http://localhost:8000/debug-db`
-    - Should show a database error
-3. `http://localhost:8000/debug-validation`
-    - Should show a validation error
-4. `http://localhost:8000/debug-auth`
-    - Should show an authentication error
-5. `http://localhost:8000/debug-not-found`
-    - Should show a 404 error
-6. `http://localhost:8000/trigger-error`
-    - Should show a custom error
+1. Trigger a basic exception
+2. Trigger a database error
+3. Trigger a validation error
+4. Trigger an authentication error
+5. Trigger a 404 error
+6. Trigger a custom error
+
+Watch the results appear in real-time on the page and check your Sentry dashboard for the captured errors.
 
 ### 5. Test Frontend Errors
 
