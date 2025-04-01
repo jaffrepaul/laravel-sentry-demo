@@ -21,20 +21,22 @@ try {
     // Add form submission handler
     document.addEventListener("DOMContentLoaded", () => {
         const form = document.querySelector("form");
-        form.addEventListener("submit", (e) => {
-            // Example: Throw error if email contains 'test'
-            const email = form.querySelector("#email").value;
-            if (email.includes("test")) {
-                throw new Error("Test email validation error");
-            }
-            // Form will submit normally if no error is thrown
-        });
+        if (form) {
+            form.addEventListener("submit", (e) => {
+                // Example: Throw error if email contains 'test'
+                const email = form.querySelector("#email").value;
+                if (email.includes("test")) {
+                    throw new Error("Test email validation error");
+                }
+                // Form will submit normally if no error is thrown
+            });
+        }
 
         // Add test endpoints handler
         const testButton = document.getElementById("testEndpoints");
         const testResults = document.getElementById("testResults");
 
-        if (testButton) {
+        if (testButton && testResults) {
             testButton.addEventListener("click", async () => {
                 testButton.disabled = true;
                 testResults.innerHTML = "Running tests...\n\n";

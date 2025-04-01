@@ -40,6 +40,13 @@ class Handler extends ExceptionHandler
             if ($e->getStatusCode() == 500) {
                 return response()->view('errors.500', [], 500);
             }
+            if ($e->getStatusCode() == 404) {
+                // Capture 404 errors in Sentry
+                if (app()->bound('sentry')) {
+                    \Sentry\captureException($e);
+                }
+                return response()->view('errors.404', [], 404);
+            }
         }
 
         return parent::render($request, $e);
