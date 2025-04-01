@@ -120,6 +120,32 @@ The application includes several ways to test Sentry error tracking:
 3. **Frontend Errors**:
     - Submit the form with an email containing "test" to trigger a JavaScript error
 
+### Testing User Feedback Feature
+
+The application includes Sentry's user feedback feature that allows users to provide feedback when they encounter errors. Here's how to test it:
+
+1. Make sure `APP_DEBUG=false` in your `.env` file to see the custom error pages
+2. Visit one of these test endpoints to trigger an error:
+
+    - `http://localhost:8000/trigger-error` - Triggers a general exception
+    - `http://localhost:8000/debug-db` - Triggers a database error
+    - `http://localhost:8000/debug-sentry` - Triggers a Sentry test error
+
+3. You should see:
+
+    - A feedback dialog where you can provide:
+        - Your name
+        - Your email
+        - Your feedback about what happened
+
+4. To view the submitted feedback:
+    - Go to your Sentry dashboard (https://sentry.io)
+    - Select your project
+    - Click on "Issues" in the left sidebar
+    - Find the error event that was triggered
+    - Click on the event to view its details
+    - Look for the "User Report" link in the error header
+
 ## Building for Production
 
 To build assets for production:

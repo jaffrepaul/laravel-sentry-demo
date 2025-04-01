@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://browser.sentry-cdn.com/7.108.0/bundle.tracing.min.js" crossorigin="anonymous"></script>
     <script>
         window.SENTRY_DSN = "{{ config('sentry.dsn') }}";
+
+        // Initialize Sentry
+        Sentry.init({
+            dsn: window.SENTRY_DSN,
+            integrations: [
+                new Sentry.BrowserTracing(),
+            ],
+            tracesSampleRate: 1.0,
+        });
     </script>
     <title>Contact Form</title>
 </head>

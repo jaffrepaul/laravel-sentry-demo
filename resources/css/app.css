@@ -179,3 +179,10 @@ button:active {
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
+
+/* Add some basic styles for the 500 error page */
+.subtitle {
+    color: #6b7280;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
