@@ -5,35 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SubmissionRequest;
 use App\Services\SubmissionService;
 use Illuminate\Http\RedirectResponse;
-use Sentry\State\HubInterface;
-use Sentry\Tracing\TransactionContext;
+use Sentry\Breadcrumbs\Breadcrumb;
 
 class SubmissionController extends Controller
 {
     public function __construct(
-        private readonly SubmissionService $submissionService,
-        private readonly HubInterface $hub
+        private readonly SubmissionService $submissionService
     ) {}
 
     public function store(SubmissionRequest $request): RedirectResponse
     {
-        // Create a new transaction context for Sentry
-        $context = new TransactionContext();
-        $context->setName('Form Submission');
-        $context->setOp('http.server'); // Labels this as an HTTP request
+        // Add breadcrumb for form submission context
+        \Sentry\addBreadcrumb(
+            type: 'info',
+            category: 'started',
+            level: 'info',
+            message: 'this is a message',
+      );
 
-        // Start a new Sentry transaction
-        $transaction = $this->hub->startTransaction($context);
-        $this->hub->setSpan($transaction); // Set as the active span
+        // Process form submission
+        $this->submissionService->storeSubmission($request->validated());
 
-        try {
-            // Process form submission
-            $this->submissionService->storeSubmission($request->validated());
-
-            // Return success response
-            return back()->with('success', 'Form submitted successfully!');
-        } finally {
-            $transaction->finish(); // Always finish the transaction
-        }
+        // Return success response
+        return back()->with('success', 'Form submitted successfully!');
     }
 }
