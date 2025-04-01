@@ -26,7 +26,30 @@ try {
                 // Example: Throw error if email contains 'test'
                 const email = form.querySelector("#email").value;
                 if (email.includes("test")) {
-                    throw new Error("Test email validation error");
+                    e.preventDefault();
+                    console.log(
+                        "🐞 Test email detected - this will trigger a Sentry error"
+                    );
+
+                    // Show simple feedback message
+                    const message = document.createElement("div");
+                    message.className = "test-message";
+                    message.textContent =
+                        "Test email detected - this will be captured in Sentry";
+
+                    // Remove any existing message
+                    const existingMessage = form.querySelector(".test-message");
+                    if (existingMessage) {
+                        existingMessage.remove();
+                    }
+
+                    // Add the new message
+                    form.appendChild(message);
+
+                    // Capture the error in Sentry without throwing
+                    Sentry.captureException(
+                        new Error("Test email validation error")
+                    );
                 }
                 // Form will submit normally if no error is thrown
             });
